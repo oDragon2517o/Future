@@ -1,0 +1,15 @@
+{
+    "name": "dragon2517/future",
+    "autoload": {
+        "psr-4": {
+            "Dragon2517\\Future\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dragon2517",
+            "email": "rabvasya1994@yandex.ru"
+        }
+    ],
+    "require": {}
+}
