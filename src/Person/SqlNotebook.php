@@ -6,9 +6,11 @@ use PDO;
 
 class SqlNotebook
 {
-    public function __construct(
-        private PDO $connection
-    ) {
+    private PDO $connection;
+
+    public function __construct(PDO $connection)
+    {
+        $this->connection = $connection;
     }
 
     public function save($notebooken): void
@@ -26,5 +28,16 @@ class SqlNotebook
             ':Date_of_birth' => $notebooken->getDateOfBirth(),
             ':Photo' => $notebooken->getPhoto(),
         ]);
+    }
+
+    public function get()
+    {
+        $statement = $this->connection->prepare(
+            'SELECT * FROM users'
+        );
+
+        $statement->execute();
+
+        return $statement;
     }
 }

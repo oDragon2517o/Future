@@ -16,3 +16,10 @@ print_r($_GET);
 echo ("\n");
 
 print_r($_SERVER);
+
+
+
+$type = $_GET['REQUEST_URI'];
+
+$a = file_get_contents('php://input');
+print_r($a);
