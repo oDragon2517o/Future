@@ -36,8 +36,12 @@ class SqlNotebook
             'SELECT * FROM users'
         );
 
+
         $statement->execute();
 
-        return $statement;
+        // $statement->fetch(PDO::FETCH_ASSOC);
+
+
+        return $statement->fetchAll();
     }
 }

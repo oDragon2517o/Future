@@ -18,11 +18,15 @@ class Request
         return $this->server['REQUEST_METHOD'];
     }
 
-    public function path(): array
+    public function path()
     {
         $components = parse_url($this->server['REQUEST_URI']);
-        $path = explode('/', $components['path']);
-        return $components;
+        $path = explode('/', $components['path'],);
+        // return $components;
+        $url = '';
+        for ($i = 1; $i < count($path); $i++) {
+            $url = $url . '/' . $path[$i];
+        }
         return $path;
     }
 }

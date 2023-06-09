@@ -9,33 +9,56 @@ use Dragon2517\Future\Person\SqlNotebook;
 $request = new Request($_GET, $_SERVER, file_get_contents('php://input'),);
 
 $connection = new PDO('sqlite:' . __DIR__ . '/blog.sqlite');
-
 $postsRepository = new SqlNotebook($connection);
 
-$User = $postsRepository->get();
+// print_r($postsRepository->get());
 
-var_dump($User->fetch(PDO::FETCH_ASSOC));
-var_dump($User->fetch(PDO::FETCH_ASSOC));
+$path = $request->path();
+$method = $request->method();
 
-// print_r($request->path());
+$routes = [
+    'GET' => [
+        '/api/v1/notebook/' => new SqlNotebook(
+            new PDO('sqlite:' . __DIR__ . '/blog.sqlite')
+        ),
+        '/api/v1/notebook/' => FindByUsername::class,
+    ],
+    'POST' => [
+        '/api/v1/notebook/' => LogIn::class,
+        '/api/v1/notebook/' => LogIn::class,
+
+    ],
+    'DELETE' => [
+        '/api/v1/notebook/' => DeletePost::class,
+    ],
+
+];
 
 
-// $routes = [
-//     'GET' => [
-//         '/api/v1/notebook/' => FindByUsername::class,
-//         '/api/v1/notebook/' => FindByUsername::class,
-//     ],
-//     'POST' => [
-//         '/api/v1/notebook/' => LogIn::class,
-//         '/api/v1/notebook/' => LogIn::class,
+$routes2 = [
+    'GET' => [
+        '/api/v1/notebook/' => 'Типо возврат всего',
+        '/api/v1/notebook/' => FindByUsername::class,
+    ],
+    'POST' => [
+        '/api/v1/notebook/' => LogIn::class,
+        '/api/v1/notebook/' => LogIn::class,
 
-//     ],
-//     'DELETE' => [
-//         '/api/v1/notebook/' => DeletePost::class,
-//     ],
+    ],
+    'DELETE' => [
+        '/api/v1/notebook/' => DeletePost::class,
+    ],
 
-// ];
+];
 
+print_r($path);
+
+// print_r($_SERVER);
+
+// $actionClassName = $routes2[$method][$path];
+
+// print_r($actionClassName);
 
 
 // print_r($_SERVER);
+// print_r(parse_url($_SERVER['REQUEST_URI']));
